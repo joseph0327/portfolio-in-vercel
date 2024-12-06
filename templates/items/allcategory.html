@@ -1,0 +1,160 @@
+
+
+{%extends 'base2.html'%}
+{%block content%}
+{%load static%}
+
+<head>
+    <!-- Bootstrap5.3 files-->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'css/allcategory.css' %}" rel="stylesheet" type="text/css"/>
+</head>
+
+<body>
+    <div class="container">
+        
+        <div class="search-box">
+            <form action="{% url 'search' %}" class="search" method="GET">
+                <div class="dropdown-container">
+                    <a href="#" class="dropdown-toggle">Categories</a>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'items' %}">View All </a>
+                    {%for category in links%}
+                      <a href="{{category.get_url}}" class="dropdown-item">{{category.category_name}}</a>
+                    {%endfor%}
+                    </div>
+                </div>
+                <input type="text" placeholder="Search for keyword and press enter" name="keyword">
+                <div>
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if keyword %}
+        <h1>Search Results for "{{ keyword }}"</h1>
+        {% if items %}
+            <div class="items-list">
+                <div class="row">
+                    {% for item in items %}
+                        <div class="col-2 mb-2">
+                            <div class='item_name'>
+                                <p>{{ item.item_name }}</p>
+                            </div>
+                            <a href="{{ item.get_url }}">
+                                <div class="thumbnail">
+                                    <img alt="{{ item.item_name }}" src="{{ item.images.url }}">
+                                </div>
+                            </a>
+                            {% comment %} <div class='item_description'>
+                                <p>{{ item.description|truncatechars:70 |safe}}</p>
+                            </div> {% endcomment %}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <p>No results found for "{{ keyword }}". Try a different keyword.</p>
+        {% endif %}
+        {% else %}
+           <h3>You can search by typing on the search box...</h3>
+        {% endif %}
+
+        
+        {% if data_count > 0 or web_count > 0 or excel_count > 0 %}
+        {% if data_count > 0 %}
+        <hr>
+        <div class="section-title">DATA ANALYTICS({{ data_count }})</div>
+            <div class="row">
+                {% for data_item in data_items %}
+                    <div class="col-2 mb-2">
+                        
+                        <div class='item_name'>
+                            <p>{{ data_item.item_name }} </p>
+                        </div>
+                        <a href="{{data_item.get_url}}">
+                            <div class="thumbnail">
+                                <img alt="Data Analytics Image 1" src="{{ data_item.images.url }}">
+                            </div>
+                        </a>
+                        {% comment %} <div class='item_description'>
+                            <p>{{ data_item.description|truncatechars:70 |safe }}</p>
+                        </div> {% endcomment %}
+                    </div> 
+                {% endfor %}
+            </div>
+            
+        {% else %}
+            
+        {% endif %}
+
+        {% if web_count > 0 %}
+        <hr>
+        <div class="section-title">WEB DEVELOPMENT AND PROGRAMMING({{web_count}})</div>
+        <div class="row">
+            {%for web_item in web_items%}
+            <div class="col-2 mb-2">
+                <div class='item_name'>
+                    <p>{{web_item.item_name}} </p>
+                </div>
+                <a href="{{web_item.get_url}}">
+                    
+                    <div class="thumbnail">
+                        <img alt="Web Development Image 1" src="{{ web_item.images.url }}">
+                    </div>
+                </a>
+                {% comment %} <div class='item_description'>
+                    <p>{{web_item.description|truncatechars:70 |safe}}</p>
+                </div> {% endcomment %}
+              
+            </div>
+            {%endfor%}
+        </div>
+        
+        {% else %}
+            
+        {% endif %}
+
+        {% if excel_count > 0 %}
+        <hr>
+        <div class="section-title">VBA/EXCEL({{excel_count}})</div>
+        <div class="row">
+            {%for excel_item in excel_items%}
+            <div class="col-2 mb-2">
+                
+                <div class='item_name'>
+                    <p>{{excel_item.item_name}} </p>
+                </div>
+                <a href="{{excel_item.get_url}}">
+                    <div class="thumbnail">
+                        <img alt="VBA/Excel Image 1" src="{{excel_item.images.url }}">
+                    </div>
+                </a>
+                {% comment %} <div class='item_description'>
+                    <p>{{ excel_item.description|truncatechars:70|safe}}...</p>
+                </div> {% endcomment %}
+                
+            </div>
+            {%endfor%}
+        </div>
+        
+        {% else %}
+            
+        {% endif %}
+
+        {% else %}
+            
+        {% endif %}
+        <h3><p><a href='{% url 'home' %}'>Go back to home page</p></a>
+        {% comment %} <a href="{% url 'favoriteslist' %}"><p>Check your favorites list here. </p></a> {% endcomment %}
+        </h3>
+       
+    </div>
+    
+    
+</body>
+
+{%endblock%}

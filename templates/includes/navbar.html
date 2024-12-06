@@ -1,0 +1,46 @@
+<header>
+    <a href="{% url 'home' %}" class="logo">Portfolio</a>
+    <nav class="navbar">
+        <a href="{% url 'adminlogin' %}">ADMIN LOGIN</a>
+        <a href="{% url 'home' %}" class="">HOME</a>
+        <a href="#about">ABOUT</a>
+        <a href="#services" >SKILLS</a>
+        <a href="#portfolio" >PROJECTS</a>
+        <a href="#certificates" >CERTIFICATES</a>
+        <a href="#contact" >CONTACT</a>
+        
+    </nav>
+    <i id="menu-icon" class="fas fa-bars"></i>
+    <i id="close-icon" class="fas fa-times close-icon"></i>
+</header>
+
+
+<script>
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const navbar = document.querySelector('.navbar');
+
+    menuIcon.addEventListener('click', () => {
+        navbar.classList.add('show'); // Show the navbar
+        menuIcon.style.display = 'none'; // Hide menu icon
+        closeIcon.style.display = 'block'; // Show close icon
+    });
+
+    closeIcon.addEventListener('click', () => {
+        navbar.classList.remove('show'); // Hide the navbar
+        closeIcon.style.display = 'none'; // Hide close icon
+        menuIcon.style.display = 'block'; // Show menu icon
+    });
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            // Reset navbar and icons for desktop view
+            navbar.classList.remove('show'); // Ensure the menu is collapsed
+            menuIcon.style.display = 'none'; // Hide the hamburger menu icon
+            closeIcon.style.display = 'none'; // Hide the close icon
+        } else {
+            // Ensure the hamburger menu is visible in mobile view
+            menuIcon.style.display = 'block'; // Show the hamburger menu icon
+            closeIcon.style.display = 'none'; // Hide the close icon
+        }
+    });
+</script>

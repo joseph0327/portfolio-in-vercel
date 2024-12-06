@@ -1,0 +1,164 @@
+{%extends 'base2.html'%}
+{%block content%}
+{%load static%}
+
+
+ <head>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+  <style>
+    
+        body {
+            background-color: #0b1120;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            margin-top: 11rem;
+            
+        }
+        h1{
+            color: #59b2f4;
+        }
+        h3 {
+            margin-top: 2rem
+        }
+        h3 a {
+            ;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        h3 a p{
+            color: #59b2f4;
+    
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #1a2238;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+         
+        }
+        .favorites-list {
+            padding: 20px;
+            
+        }
+
+        .favorites-list a{
+            text-decoration: none;
+            
+        }
+        .favorite-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #2d3a58;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        .favorite-item:hover {
+            transform: scale(1.02);
+        }
+        .favorite-item img {
+            width: 100px;
+            height: 100px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+        }
+        .favorite-content {
+            margin-left: 20px;
+        }
+        .tag {
+            display: inline-block;
+            background-color: #e0e0e0;
+            color: black;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .title {
+            color: #fff;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .description {
+            font-size: 14px;
+            color: #b0b0b0;
+        }
+        .remove-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: #ff4d4d;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+        .remove-btn:hover {
+            color: #ff0000;
+            transform: scale(1.2);
+        }
+        
+  </style>
+ </head>
+ <body>
+  <div class="container">
+    <div class="favorites-list">
+        <h2>
+        FAVORITES LIST
+        </h2>
+        {%if not favoritesList_item %}
+        <br>
+        <br>
+        <h1>You don't have any favorites saved.</h1>
+
+
+        {%else%}
+        {%for fav_item in favoritesList_item%}
+        
+            <div class="favorite-item">
+                <a href="{{fav_item.item.get_url}}">
+                <img alt="Placeholder image" height="100" src="{{fav_item.item.images.url}}" width="100"/>
+                </a>
+                <div class="favorite-content">
+                    <div class="tag">
+                    {{fav_item.item.category.category_name}}
+                    </div>
+                    <div class="title">
+                    {{fav_item.item.item_name}}
+                    </div>
+                    <div class="description">
+                    {{fav_item.item.description|truncatechars:200}}...
+                    </div>
+                </div>
+                <a href="{% url 'remove_favorite' fav_item.item.id %}">
+                    <i class="fas fa-trash remove-btn"></i>
+                </a>
+                
+            </div>
+        
+        {%endfor%}
+        {%endif%}
+        <h3>
+        <a href="{% url 'items' %}" class="view-all"><p>VIEW ALL PROJECT LIST</p></a>
+        <br>
+        <br>
+        <br>
+        <a href='{% url 'home' %}'><p>Go back to home page. </p></a>
+        
+        </h3>
+    </div>
+    
+  </div>
+ </body>
+
+
+
+
+
+
+
+{%endblock%}

@@ -1,0 +1,165 @@
+{%extends 'base2.html'%}
+{%block content%}
+{%load static%}
+
+ <head>
+  
+  <title>
+   About Me
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+  <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #1a202c;
+            color: #e2e8f0;
+            margin-top: 10rem;
+            
+        }
+        h3 a{
+            text-decoration:none;
+            color:#59b2f4;
+
+        }
+        h3{
+            margin-bottom: 4rem;
+        }
+        .card-title1{
+            font-size:1.9rem;
+        }
+        .card {
+            background-color: #2d3748;
+            border: none;
+            border-radius:10px;
+            margin-bottom: 5rem;
+            padding: 1.5rem 0;
+        }
+        .card-body {
+            color: #e2e8f0;
+            padding: 0 2rem;
+            
+        }
+        .card-text{
+            font-size:1.2rem;
+            text-align: justify;
+        }
+        .list-group-item {
+            background-color: #2d3748;
+            border: none;
+            color: #a0aec0;
+        }
+        .list-group-item i {
+            color: #38a169; /* Green color for check mark */
+            margin-right: 10px;
+        }
+        .profile-img {
+            border: 5px solid #2d3748;
+        }
+  </style>
+ </head>
+ <body>
+  <div class="container mt-5">
+   <h1 class="text-center text-white mb-5">
+    About Me
+   </h1>
+   <div class="card mb-4">
+    <div class="row no-gutters">
+     <div class="col-md-4 d-flex align-items-center justify-content-center p-4">
+      <img alt="Profile image placeholder" class="rounded-circle img-fluid profile-img" height="200" src="{% static "images/mypicaboutme2.jpg" %}" width="200"/>
+     </div>
+     <div class="col-md-8">
+      <div class="card-body">
+       <h5 class="card-title1">
+        IT Support Professional | Aspiring Python Developer | Aspiring Data Analyst
+       </h5>
+       <ul class="list-group list-group-flush mt-3">
+        <li class="list-group-item">
+            <i class="fas fa-check-circle">
+            </i>
+            With 7 Years of IT Support Experience
+        </li>
+            <li class="list-group-item">
+            <i class="fas fa-check-circle">
+            </i>
+             From Cebu, Philippines
+        </li>
+        </li>
+            <li class="list-group-item">
+            <i class="fas fa-check-circle">
+            </i>
+            Bachelor of Science in Information Technology Graduate
+        </li>
+        </li>
+            <li class="list-group-item">
+            <i class="fas fa-check-circle">
+            </i>
+             Loves web development and data analytics
+        </li>
+        </li>
+            <li class="list-group-item">
+            <i class="fas fa-check-circle">
+            </i>
+             I have a passion for learning and self-improvement
+        </li>
+        </li>
+            <li class="list-group-item">
+            <i class="fas fa-check-circle">
+            </i>
+             I have a pet dog name Panda
+        </li>
+        </li>
+            <li class="list-group-item">
+            <i class="fas fa-check-circle">
+            </i>
+             Likes travelling, going to the gym, mobile games and mostly spend time with family
+        </li>
+        </li>
+            <li class="list-group-item">
+            <i class="fas fa-check-circle">
+            </i>
+             Willing to help others and be a team player
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+   </div>
+   <div class="card">
+    <div class="card-body">
+     <p class="card-text">
+        Since graduating from college, I have silently battled a persistent fear of failure, a challenge that has followed me since childhood. Despite this, I remain resilient, striving to overcome it each day. My fascination with technology drives my passion for learning, even though I’ve faced setbacks and rejections when applying for tech roles. I firmly believe in my potential to secure a fulfilling career and dedicate myself to continuous growth, not only to achieve my goals but also to support my parents and contribute to their well-being.
+    </p>
+     <p class="card-text">
+        Throughout my journey, perseverance has been my constant companion. Despite facing significant financial challenges during my education, my parents' unwavering support enabled me to graduate successfully. Armed with determination, I ventured into the job market, aiming to secure a role as a developer. However, limited opportunities in that field initially steered me toward the call center industry.
+    </p>
+     <p class="card-text">
+        My first technical role was in tech support, which, although brief at seven months, opened the door to a position as a desktop support professional. While the pay was modest, the role was immensely rewarding, with a broad scope of responsibilities that allowed me to grow both technically and personally. My dedication to meeting quotas and assisting others earned me a Hive Lead position. After three years, I sought new opportunities to align my career with my financial goals.
+    </p>
+     <p class="card-text">
+        This search led me to an IT support role at a web hosting company. Though I continued to develop my skills, I sought greater fulfillment. A contract role as an IT Support Engineer followed, providing invaluable hands-on experience and exposure to new challenges.
+     </p>
+     <p class="card-text">
+        I then joined Optum as part of their IT Service Desk team. While initially challenging, I quickly adapted and streamlined my workflow. However, opportunities for advancement within the organization were limited. Undeterred, I took charge of my professional growth by leveraging resources like Coursera and internal training programs to upskill myself in cloud engineering, web development, and data analytics.
+    </p>
+     <p class="card-text">
+        Now, I am seeking a role that offers meaningful career growth, the chance to specialize in one of these fields, and the financial stability to support my family. With a foundation of resilience, continuous learning, and a passion for technology, I am eager to contribute and excel in a dynamic organization.    
+    </p>
+    </div>
+    
+   </div>
+   <h3>Go back to home page.<a href='{% url 'home' %}'><p>Click here. </p></a></h3>
+
+  </div>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+  </script>
+  
+ </body>
+
+
+{%endblock%}

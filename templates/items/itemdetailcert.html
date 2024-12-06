@@ -1,0 +1,207 @@
+{%extends 'base2.html'%}
+{%block content%}
+{%load static%}
+
+
+<head>
+    <!-- Bootstrap5.3 files-->
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            background-color: #0b1120;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin-top: 10rem;
+        }
+        .content {
+            
+            padding: 20px;
+            margin: 0 10%;
+        }
+        .header {
+            margin-bottom: 20px;
+            font-size:20px;
+        }
+        .header p {
+            margin: 0;
+        }
+        .carousel {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .carousel-inner img {
+            width: 100%;
+            height: auto;        
+            object-fit: cover;    
+            max-height: 500px;   
+        }
+        
+        .carousel-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        .text-box {
+            background-color: #3a3f51;
+            color: #59b2f4;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            font-size:15px;
+        }
+        .modal-content img {
+            width: 100%;
+        }
+        .download-button {
+            background-color: #59b2f4;
+            color: #262b40;
+            border: none;
+            font-size: 15px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .carousel-image {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .carousel-image:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+        
+        
+        .modal-body img {
+            max-height: 90vh; 
+            object-fit: contain;  
+            
+        }
+
+        .modal-content {
+            background-color: rgba(0, 0, 0, 0.5);  /* Black color with 50% opacity */
+        }
+        
+       
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);  /* Darken the background of the modal */
+        }
+        .modal-header {
+            position: relative; 
+            padding: 2rem; 
+            border: none;  /* Remove the border from the modal header */
+        }
+
+        .btn-close {
+            color: white;
+            background-color: transparent;
+            border: none;
+            font-size: 30px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 5rem;  
+            top: 3rem;  /* Adjust the right position to your liking */
+            transform: translateY(-50%); 
+            
+        }
+        
+        .btn-close:hover {
+            color: #fff;  
+        }
+        .certlist,
+        .certlist h2         {
+            text-decoration: none;
+            padding-top: 5rem;
+            color: #59b2f4;
+            font-size:2rem;
+            font-weight:700;
+        }
+
+        a{
+            text-decoration: none;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="header">
+            <p>TITLE : {{cert_item.cert_name | upper}}</p>
+        </div>
+        <!-- Carousel -->
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                {% for i in cert_gallery %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <img src="{{ i.image.url }}" class="d-block w-100 carousel-image" alt="" data-bs-toggle="modal" data-bs-target="#imageModal" data-img-url="{{ i.image.url }}">
+                </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <!-- Modal for Enlarged Image -->
+        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!-- Close Button (X) -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <!-- The enlarged image will be inserted here -->
+                        <img src="" id="modalImage" class="img-fluid" alt="Enlarged Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        {% comment %} <button class="download-button">Download file here</button> {% endcomment %}
+        <div class="text-box">
+            {{cert_item.description}}
+        </div>
+        <div class="certlist">
+            <a href="{% url 'certlist' %}">
+                    <h2>VIEW ALL CERTIFICATES HERE.</h2>
+            </a>
+        </div>
+    </div>
+    
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Select all images with the class '.carousel-image'
+        document.querySelectorAll('.carousel-image').forEach(img => {
+            // Add click event listener to each image
+            img.addEventListener('click', function () {
+                // Get the image URL from the 'data-img-url' attribute
+                var imgUrl = this.getAttribute('data-img-url');
+                
+                // Get the modal image element
+                var modalImage = document.getElementById('modalImage');
+                
+                // Set the modal image source to the clicked image's URL
+                modalImage.src = imgUrl;
+            });
+        });
+    });
+    
+</script>
+
+{%endblock%}
