@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,6 +28,8 @@ SECRET_KEY = 'django-insecure-#@u6%kvan8(1im__6tf_!k8!b7&zity6u4)m@!ce!6d))q3)%@
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 
 # Application definition
@@ -86,10 +90,11 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/tmp/db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Ensure this path is correct
     }
 }
 
