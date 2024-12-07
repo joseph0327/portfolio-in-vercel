@@ -91,12 +91,14 @@ AUTH_USER_MODEL = 'accounts.Account'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',  # Ensure this path is correct
+        'NAME': '/tmp/db.sqlite3',
     }
 }
+
 
 
 
